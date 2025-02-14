@@ -1,0 +1,16 @@
+{
+    "name": "Nocaut Boxe",
+    "short_name": "Academia Nocaut boxe",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "icons": [
+      {
+        "src": "/assets/imagens/site-admin/logo.png",
+        "sizes": "300x300",
+        "type": "image/png"
+      }
+    ]
+}
+  
