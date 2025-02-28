@@ -6,6 +6,7 @@ use Models\GrupoExercicios;
 use Models\Exercicios;
 use Models\ExercicioCompleto;
 use Models\AlunoTreinoMusculacao;
+use Models\BlocoExercicio;
 
 class GrupoTreinoRepository {
 
@@ -46,6 +47,7 @@ class GrupoTreinoRepository {
                 'grupo_nome' => [
                     'id' => $grupo->id,
                     'nome' => $grupo->nome,
+                    'identificador_bloco' => $grupo_id->identificador_bloco,
                     'exercicios_completos' => $exercicios_completos
                 ],
                 'exercicios_grupo' => $exercicioGrupo,
@@ -61,10 +63,11 @@ class GrupoTreinoRepository {
 
 
     // criando grupo treino
-    public static function create($id_treino, $grupo_id) {
+    public static function create($id_treino, $grupo_id, $identificador_bloco) {
         return GrupoTreino::create([
             'id_grupo_treino' => $grupo_id,
             'id_treino' => $id_treino,
+            'identificador_bloco' => $identificador_bloco
         ]);
     }
 
@@ -118,7 +121,7 @@ class GrupoTreinoRepository {
             return null;
         }
 
-        // pegando os grupo quue são apenas com ids
+        // pegando os grupo que são apenas com ids
         $grupo_com_id_treino_aluno = GrupoTreino::where('id_treino', $treino_aluno->id)->get();
 
         // percorrendo cada grupo para obter os dados daquele grupo especifico passando o id do grupo;
@@ -151,6 +154,7 @@ class GrupoTreinoRepository {
             
             $dadosFinais[] = [
                 'nome' => $grupo->nome,
+                'bloco' => $grupo_com_id->identificador_bloco,
                 'exercicios_completos' => $exercicios_completos
             ];
         }
@@ -163,6 +167,88 @@ class GrupoTreinoRepository {
     // atualizando carga do exercicio
     public static function updateCarga($data, $id) {
         $res = ExercicioCompleto::where('id', $id)->update($data);
+
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    // criando bloco
+    public static function createBloco($data) {
+        $res = BlocoExercicio::create([
+            'identificador' => $data['identificador'],
+            'nome_bloco' => $data['nome_bloco'],
+            'aluno_treino_id' => $data['aluno_treino_id']
+        ]);
+
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // pegando os blocos passando o id do aluno treino
+    public static function getBlocos($id) {
+        $res = BlocoExercicio::where('aluno_treino_id', $id)->get();
+
+        if($res){
+            return $res;
+        }else{
+            return false;
+        }
+    }
+
+    // pegando os blocos passando o UID do aluno treino
+    public static function getBlocosUid($uid) {
+        $aluno = AlunoTreinoMusculacao::where('uid', $uid)->first();
+        
+        if(!$aluno){
+            return false;
+        }
+        
+        $res = BlocoExercicio::where('aluno_treino_id', $aluno->id)->get();
+
+        if($res){
+            return $res;
+        }else{
+            return false;
+        }
+    }
+
+
+    // deletando bloco
+    public static function deletarBloco($identificador) {
+        
+        // buscando os grupo
+        $grupo = GrupoTreino::where('identificador_bloco', $identificador)->get();
+
+        // percorrendo cada grupo para deletar os exercicios completos
+        foreach ($grupo as $key => $value) {
+            ExercicioCompleto::where('grupo_exercicios_id', $value->id)->delete();
+        }
+
+        // deletando os grupos
+        GrupoTreino::where('identificador_bloco', $identificador)->delete();
+
+        // deletando o bloco
+        $res = BlocoExercicio::where('identificador', $identificador)->delete();
+
+
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    // atualizando bloco
+    public static function updateBloco($identificador, $nome) {
+        $res = BlocoExercicio::where('identificador', $identificador)->update(['nome_bloco' => $nome]);
 
         if($res){
             return true;

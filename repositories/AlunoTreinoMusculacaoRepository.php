@@ -4,6 +4,7 @@ namespace Repositories;
 use Models\AlunoTreinoMusculacao;
 use Models\GrupoTreino;
 use Models\ExercicioCompleto;
+use Models\BlocoExercicio;
 
 class AlunoTreinoMusculacaoRepository {
     // buscando todos os treinos alunos
@@ -36,6 +37,9 @@ class AlunoTreinoMusculacaoRepository {
         foreach ($grupo_treino as $key => $grupo) {
             ExercicioCompleto::where('grupo_exercicios_id', $grupo['id'])->delete();
         }
+
+        // deletando bloco exercicios do grupo
+        BlocoExercicio::where('aluno_treino_id', $id)->delete();
 
         // deletando grupo treino criado pro aluno (oq tem somente id)
         $grupo_treino_delete = GrupoTreino::where('id_treino', $id)->delete();

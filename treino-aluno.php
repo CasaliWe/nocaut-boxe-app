@@ -2,13 +2,18 @@
    //importa configurações;
    require __DIR__ . '/config/config.php';
 
+   $uid = $_GET['uid'] ?? null;
+
     // Pegando os dados do treino do aluno
     use Repositories\AlunoTreinoMusculacaoRepository;
-    $treino_aluno = AlunoTreinoMusculacaoRepository::getTreinoAlunoUid($_GET['uid']);
+    $treino_aluno = $uid ? AlunoTreinoMusculacaoRepository::getTreinoAlunoUid($_GET['uid']) : [];
 
     // Pegando os grupos de treino do aluno
    use Repositories\GrupoTreinoRepository;
-   $grupos_treino = GrupoTreinoRepository::getAllUid($_GET['uid']);
+   $grupos_treino = $uid ? GrupoTreinoRepository::getAllUid($_GET['uid']) : [];
+
+    // Pegando os blocos de exercícios;
+    $blocos = $uid ? GrupoTreinoRepository::getBlocosUid($_GET['uid']) : [];
 ?>
 
 <!DOCTYPE html>

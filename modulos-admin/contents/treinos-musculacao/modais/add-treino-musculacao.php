@@ -35,6 +35,16 @@
                   <option value='8 semanas'>8 semanas</option>
                   <option value='9 semanas'>9 semanas</option>
                   <option value='10 semanas'>10 semanas</option>
+                  <option value='11 semanas'>11 semanas</option>
+                  <option value='12 semanas'>12 semanas</option>
+                  <option value='13 semanas'>13 semanas</option>
+                  <option value='14 semanas'>14 semanas</option>
+                  <option value='15 semanas'>15 semanas</option>
+                  <option value='16 semanas'>16 semanas</option>
+                  <option value='17 semanas'>17 semanas</option>
+                  <option value='18 semanas'>18 semanas</option>
+                  <option value='19 semanas'>19 semanas</option>
+                  <option value='20 semanas'>20 semanas</option>
                 </select>
               </div>
 

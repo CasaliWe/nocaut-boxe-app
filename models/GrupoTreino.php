@@ -9,6 +9,7 @@ class GrupoTreino extends Model {
     protected $fillable = [
         'id_grupo_treino',
         'id_treino',
+        'identificador_bloco'
     ];
     public $timestamps = false;
 }

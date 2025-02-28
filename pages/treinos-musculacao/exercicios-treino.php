@@ -16,6 +16,9 @@
    // Pegando os grupos de treino do aluno
    use Repositories\GrupoTreinoRepository;
    $grupos_treino = GrupoTreinoRepository::getAll($_GET['id']);
+
+    // Pegando os blocos de exercícios;
+    $blocos = GrupoTreinoRepository::getBlocos($_GET['id']);
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +67,18 @@
     <!-- MODAL DELETAR GRUPO COMPLETO -->
     <?php include_once  __DIR__ . "/../../modulos-admin/contents/exercicios-treino/modais/deletar-grupo-completo.php"; ?>
     <!-- MODAL DELETAR GRUPO COMPLETO -->
+
+    <!-- MODAL BLOCO -->
+    <?php include_once  __DIR__ . "/../../modulos-admin/contents/exercicios-treino/modais/adicionar-bloco-exercicio.php"; ?>
+    <!-- MODAL BLOCO -->
+
+    <!-- MODAL BLOCO DELETAR -->
+    <?php include_once  __DIR__ . "/../../modulos-admin/contents/exercicios-treino/modais/deletar-bloco.php"; ?>
+    <!-- MODAL BLOCO DELETAR -->
+
+    <!-- MODAL BLOCO EDITAR -->
+    <?php include_once  __DIR__ . "/../../modulos-admin/contents/exercicios-treino/modais/editar-bloco.php"; ?>
+    <!-- MODAL BLOCO EDITAR -->
 
     <!-- MODAL GIF FULLSCREEN -->
     <?php include_once  __DIR__ . "/../../modulos-admin/modal-gif-full-screen/index.php"; ?>

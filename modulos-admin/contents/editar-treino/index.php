@@ -40,6 +40,16 @@
                 <option value='8 semanas' <?= $treino_aluno['duracao_treino'] == '8 semanas' ? 'selected' : '' ?>>8 semanas <?= $treino_aluno['duracao_treino'] == '8 semanas' ? '(Atual)' : '' ?></option>
                 <option value='9 semanas' <?= $treino_aluno['duracao_treino'] == '9 semanas' ? 'selected' : '' ?>>9 semanas <?= $treino_aluno['duracao_treino'] == '9 semanas' ? '(Atual)' : '' ?></option>
                 <option value='10 semanas' <?= $treino_aluno['duracao_treino'] == '10 semanas' ? 'selected' : '' ?>>10 semanas <?= $treino_aluno['duracao_treino'] == '10 semanas' ? '(Atual)' : '' ?></option>
+                <option value='11 semanas' <?= $treino_aluno['duracao_treino'] == '11 semanas' ? 'selected' : '' ?>>11 semanas <?= $treino_aluno['duracao_treino'] == '11 semanas' ? '(Atual)' : '' ?></option>
+                <option value='12 semanas' <?= $treino_aluno['duracao_treino'] == '12 semanas' ? 'selected' : '' ?>>12 semanas <?= $treino_aluno['duracao_treino'] == '12 semanas' ? '(Atual)' : '' ?></option>
+                <option value='13 semanas' <?= $treino_aluno['duracao_treino'] == '13 semanas' ? 'selected' : '' ?>>13 semanas <?= $treino_aluno['duracao_treino'] == '13 semanas' ? '(Atual)' : '' ?></option>
+                <option value='14 semanas' <?= $treino_aluno['duracao_treino'] == '14 semanas' ? 'selected' : '' ?>>14 semanas <?= $treino_aluno['duracao_treino'] == '14 semanas' ? '(Atual)' : '' ?></option>
+                <option value='15 semanas' <?= $treino_aluno['duracao_treino'] == '15 semanas' ? 'selected' : '' ?>>15 semanas <?= $treino_aluno['duracao_treino'] == '15 semanas' ? '(Atual)' : '' ?></option>
+                <option value='16 semanas' <?= $treino_aluno['duracao_treino'] == '16 semanas' ? 'selected' : '' ?>>16 semanas <?= $treino_aluno['duracao_treino'] == '16 semanas' ? '(Atual)' : '' ?></option>
+                <option value='17 semanas' <?= $treino_aluno['duracao_treino'] == '17 semanas' ? 'selected' : '' ?>>17 semanas <?= $treino_aluno['duracao_treino'] == '17 semanas' ? '(Atual)' : '' ?></option>
+                <option value='18 semanas' <?= $treino_aluno['duracao_treino'] == '18 semanas' ? 'selected' : '' ?>>18 semanas <?= $treino_aluno['duracao_treino'] == '18 semanas' ? '(Atual)' : '' ?></option>
+                <option value='19 semanas' <?= $treino_aluno['duracao_treino'] == '19 semanas' ? 'selected' : '' ?>>19 semanas <?= $treino_aluno['duracao_treino'] == '19 semanas' ? '(Atual)' : '' ?></option>
+                <option value='20 semanas' <?= $treino_aluno['duracao_treino'] == '20 semanas' ? 'selected' : '' ?>>20 semanas <?= $treino_aluno['duracao_treino'] == '20 semanas' ? '(Atual)' : '' ?></option>
             </select>
         </div>
         <div class="mb-3">
