@@ -102,7 +102,7 @@
                 <?php
                     $serie_repeticao = explode('x', $exercicio['serie_rep']);
                     $serie = $serie_repeticao[0];
-                    $repeticao = $serie_repeticao[1];
+                    $repeticao = isset($serie_repeticao[1]) ? $serie_repeticao[1] : null;
                 ?>
                 <!-- separando serie da repetição -->
 
@@ -114,9 +114,14 @@
                     <div style="cursor: pointer;" onclick="mudarCargaExercicio('<?= $exercicio['exercicio']['nome']; ?>', '<?= $exercicio['carga']; ?>', '<?= $exercicio['id']; ?>', '<?= $treino_aluno['uid']; ?>')" class="col-9">
                         <h6 class="fw-normal text-secondary"><span class="fw-bold"><?= $grupo_exercicios['nome']; ?></span> | <?= $exercicio['exercicio']['nome']; ?></h6>
                         <div>
-                            <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-layer-group"></i> <?= $serie; ?></span>
-                            <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-sync-alt"></i> <?= $repeticao; ?></span>
-                            <span class="small me-0 text-secondary fw-semibold"><i class="text-danger fas fa-weight-hanging"></i> <?= $exercicio['carga']; ?></span>
+                            <?php if($repeticao){ ?>
+                                <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-layer-group"></i> <?= $serie; ?></span>
+                                <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-sync-alt"></i> <?= $repeticao; ?></span>
+                                <span class="small me-0 text-secondary fw-semibold"><i class="text-danger fas fa-weight-hanging"></i> <?= $exercicio['carga']; ?></span>
+                            <?php }else{ ?>
+                                <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-sync-alt"></i> <?= $serie; ?><?= $serie == '1:30 min' || $serie == '1 min' || $serie == '45 seg'  ? '' : 'x' ?> </span>
+                                <span class="small me-0 text-secondary fw-semibold"><i class="text-danger fas fa-weight-hanging"></i> <?= $exercicio['carga']; ?></span>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -152,7 +157,7 @@
                                         <?php
                                             $serie_repeticao = explode('x', $exercicio['serie_rep']);
                                             $serie = $serie_repeticao[0];
-                                            $repeticao = $serie_repeticao[1];
+                                            $repeticao = isset($serie_repeticao[1]) ? $serie_repeticao[1] : null;
                                         ?>
                                         <!-- separando serie da repetição -->
 
@@ -164,9 +169,14 @@
                                             <div style="cursor: pointer;" onclick="mudarCargaExercicio('<?= $exercicio['exercicio']['nome']; ?>', '<?= $exercicio['carga']; ?>', '<?= $exercicio['id']; ?>', '<?= $treino_aluno['uid']; ?>')" class="col-9">
                                                 <h6 class="fw-normal text-secondary"><span class="fw-bold"><?= $grupo_exercicios['nome']; ?></span> | <?= $exercicio['exercicio']['nome']; ?></h6>
                                                 <div>
-                                                    <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-layer-group"></i> <?= $serie; ?></span>
-                                                    <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-sync-alt"></i> <?= $repeticao; ?></span>
-                                                    <span class="small me-0 text-secondary fw-semibold"><i class="text-danger fas fa-weight-hanging"></i> <?= $exercicio['carga']; ?></span>
+                                                    <?php if($repeticao){ ?>
+                                                        <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-layer-group"></i> <?= $serie; ?></span>
+                                                        <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-sync-alt"></i> <?= $repeticao; ?></span>
+                                                        <span class="small me-0 text-secondary fw-semibold"><i class="text-danger fas fa-weight-hanging"></i> <?= $exercicio['carga']; ?></span>
+                                                    <?php }else{ ?>
+                                                        <span class="small me-3 text-secondary fw-semibold"><i class="text-danger fas fa-sync-alt"></i> <?= $serie; ?><?= $serie == '1:30 min' || $serie == '1 min' || $serie == '45 seg'  ? '' : 'x' ?> </span>
+                                                        <span class="small me-0 text-secondary fw-semibold"><i class="text-danger fas fa-weight-hanging"></i> <?= $exercicio['carga']; ?></span>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
