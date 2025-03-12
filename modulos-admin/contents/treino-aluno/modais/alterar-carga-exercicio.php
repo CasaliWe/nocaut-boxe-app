@@ -23,6 +23,7 @@
                   <label for='carga' class="small">Altera carga para:</label>
                   <select id='carga' name='carga'  class='form-control' required>
                     <option value='Máx' selected>Máx</option>
+                    <option value='Livre'>Livre</option>
                     <option value='1kg'>1kg</option>
                     <option value='2kg'>2kg</option>
                     <option value='3kg'>3kg</option>

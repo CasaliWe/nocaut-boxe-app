@@ -30,6 +30,7 @@
                   <label for='carga' class="small">Carga</label>
                   <select id='carga' name='carga'  class='form-control' required>
                     <option value='Máx' selected>Máx</option>
+                    <option value='Livre'>Livre</option>
                     <option value='1kg'>1kg</option>
                     <option value='2kg'>2kg</option>
                     <option value='3kg'>3kg</option>
@@ -73,6 +74,59 @@
                     <option value='4x8'>4x8</option>
                     <option value='4x6'>4x6</option>
                     <option value='4x4'>4x4</option>
+                    <option value='45 seg'>45 seg</option>
+                    <option value='1 min'>1 min</option>
+                    <option value='1:30 min'>1:30 min</option>
+                    <option value='1x'>1x</option>
+                    <option value='2x'>2x</option>
+                    <option value='3x'>3x</option>
+                    <option value='4x'>4x</option>
+                    <option value='5x'>5x</option>
+                    <option value='6x'>6x</option>
+                    <option value='7x'>7x</option>
+                    <option value='8x'>8x</option>
+                    <option value='9x'>9x</option>
+                    <option value='10x'>10x</option>
+                    <option value='11x'>11x</option>
+                    <option value='12x'>12x</option>
+                    <option value='13x'>13x</option>
+                    <option value='14x'>14x</option>
+                    <option value='15x'>15x</option>
+                    <option value='16x'>16x</option>
+                    <option value='17x'>17x</option>
+                    <option value='18x'>18x</option>
+                    <option value='19x'>19x</option>
+                    <option value='20x'>20x</option>
+                    <option value='21x'>21x</option>
+                    <option value='22x'>22x</option>
+                    <option value='23x'>23x</option>
+                    <option value='24x'>24x</option>
+                    <option value='25x'>25x</option>
+                    <option value='26x'>26x</option>
+                    <option value='27x'>27x</option>
+                    <option value='28x'>28x</option>
+                    <option value='29x'>29x</option>
+                    <option value='30x'>30x</option>
+                    <option value='31x'>31x</option>
+                    <option value='32x'>32x</option>
+                    <option value='33x'>33x</option>
+                    <option value='34x'>34x</option>
+                    <option value='35x'>35x</option>
+                    <option value='36x'>36x</option>
+                    <option value='37x'>37x</option>
+                    <option value='38x'>38x</option>
+                    <option value='39x'>39x</option>
+                    <option value='40x'>40x</option>
+                    <option value='41x'>41x</option>
+                    <option value='42x'>42x</option>
+                    <option value='43x'>43x</option>
+                    <option value='44x'>44x</option>
+                    <option value='45x'>45x</option>
+                    <option value='46x'>46x</option>
+                    <option value='47x'>47x</option>
+                    <option value='48x'>48x</option>
+                    <option value='49x'>49x</option>
+                    <option value='50x'>50x</option>
                   </select>
                 </div>
           
