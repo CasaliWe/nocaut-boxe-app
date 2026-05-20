@@ -7,7 +7,7 @@
     if(strpos($urlAtual, 'index.php') !== false){
         $pagAtual = $_ENV['NOME_SITE'];
     }else if(strpos($urlAtual, 'pages/auth/login.php') !== false){
-        $pagAtual = $_ENV['NOME_SITE'] . ' | Login';
+        $pagAtual = $_ENV['NOME_SITE'] . ' | Login Sistema';
     }else if(strpos($urlAtual, 'treino-aluno.php') !== false){
         $pagAtual = $_ENV['NOME_SITE'] . ' | Treino do Aluno';
     }else{

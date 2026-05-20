@@ -28,4 +28,3 @@ jobs:
 
             git pull origin main
             chown -R nocautboxe:nocautboxe /home/nocautboxe/htdocs/nocautboxe.com
-            npm run build
