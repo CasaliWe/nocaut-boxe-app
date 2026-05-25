@@ -7,4 +7,7 @@ AJUSTES NOCAUT:
 - Alunos ativos - livre - filtro vencendo, vencido, aniversio, modalidades - o card deve mostrar já o aviso - pesquisa pelo nome - editar colocar data pagamento;
 - Entradas e saidas - admin - colocar qual banco q saiu  SAIDAS - para entradas reagir aos cadastros ENTRADAS;
 
+pesos de 1 a 100;
+
+
 - Separar as pagina para saber quem pode mecher.
