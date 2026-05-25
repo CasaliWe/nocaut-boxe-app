@@ -12,6 +12,7 @@
     $activeEditarTreinoMusculacao = false;
     $activeExerciciosTreinoMusculacao = false;
     $activeBackups = false;
+    $activeConfiguracoes = false;
 
     // Devolve o nome da página atual
     if(strpos($urlAtual, 'treinos-musculacao.php') !== false){
@@ -32,6 +33,9 @@
     }else if(strpos($urlAtual, 'backups-sistema.php') !== false){
         $tituloContentPagina = "Backups do sistema";
         $activeBackups = true;
+    }else if(strpos($urlAtual, 'configuracoes.php') !== false){
+        $tituloContentPagina = "Configurações";
+        $activeConfiguracoes = true;
     }else{
         $tituloContentPagina = "Painel administrativo";
         $activeDashboard = true;
@@ -45,5 +49,6 @@
     <a href="<?= $base_url; ?>pages/treinos-musculacao/treinos-musculacao.php" class="link-nav-desktop <?= $activeTreinoMusculacao || $activeCadastroExerciciosMusculacao || $activeEditarTreinoMusculacao || $activeExerciciosTreinoMusculacao ? 'active-link-desktop' : ''; ?>">Treinos Musculação</a>
     <a href="<?= $base_url; ?>pages/auth/usuarios-admin.php" class="link-nav-desktop <?= $activeUsuariosAdmin ? 'active-link-desktop' : ''; ?>">Usuários do sistema</a>
     <a href="<?= $base_url; ?>pages/backups/backups-sistema.php" class="link-nav-desktop <?= $activeBackups ? 'active-link-desktop' : ''; ?>">Backups do sistema</a>
+    <a href="<?= $base_url; ?>pages/configuracoes/configuracoes.php" class="link-nav-desktop <?= $activeConfiguracoes ? 'active-link-desktop' : ''; ?>">Configurações</a>
     <a class="link-nav-desktop"><?php include __DIR__ . "/../../btn-logout/index.php"; ?></a>
 </nav>
