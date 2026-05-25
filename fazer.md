@@ -1,6 +1,7 @@
 AJUSTES NOCAUT:
+- [] Configurações - livre - pacotes livre com valor definido, no cadastro puxa e tem a opção de colocar a % de desconto + porcentagem de juros;
+
 - Mensagem formal de aviso quando a mensalidade estiver atrasada no treino do aluno;
-- Configurações - livre - pacotes livre com valor definido, no cadastro puxa e tem a opção de colocar a % de desconto + porcentagem de juros;
 - Cadastro de aluno - exatamente como ta na ficha - acrescentar nome e numero responsável, não precisa preencher: face - data começo e data edição - pacote, justes e descontos, status - forma de pagamento - banco caiu e assim cair pronto no entradas como entrada;
 - cadastro direto aluno sem preço caindo no aprovar para colocar o preço;
 - Colocar criado em e editar em no aluno;
