@@ -8,6 +8,10 @@ class ServicoValorRepository {
         return ServicoValor::orderBy('descricao', 'asc')->get();
     }
 
+    public static function getById($id) {
+        return ServicoValor::where('id', $id)->first();
+    }
+
     public static function create($data) {
         $res = ServicoValor::create($data);
 

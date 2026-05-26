@@ -11,6 +11,7 @@
     $activeCadastroExerciciosMusculacao = false;
     $activeEditarTreinoMusculacao = false;
     $activeExerciciosTreinoMusculacao = false;
+    $activeAlunos = false;
     $activeBackups = false;
     $activeConfiguracoes = false;
 
@@ -30,6 +31,9 @@
     }else if(strpos($urlAtual, 'exercicios-treino.php') !== false){
         $tituloContentPagina = "Exercícios do treino";
         $activeExerciciosTreinoMusculacao = true;
+    }else if(strpos($urlAtual, 'alunos.php') !== false){
+        $tituloContentPagina = "Alunos";
+        $activeAlunos = true;
     }else if(strpos($urlAtual, 'backups-sistema.php') !== false){
         $tituloContentPagina = "Backups do sistema";
         $activeBackups = true;
@@ -47,6 +51,7 @@
 
 <nav class="d-flex flex-column w-100 mt-5 pt-5 mt-lg-0 pt-lg-0">
     <a href="<?= $base_url; ?>pages/treinos-musculacao/treinos-musculacao.php" class="link-nav-desktop <?= $activeTreinoMusculacao || $activeCadastroExerciciosMusculacao || $activeEditarTreinoMusculacao || $activeExerciciosTreinoMusculacao ? 'active-link-desktop' : ''; ?>">Treinos Musculação</a>
+    <a href="<?= $base_url; ?>pages/alunos/alunos.php" class="link-nav-desktop <?= $activeAlunos ? 'active-link-desktop' : ''; ?>">Alunos</a>
     <a href="<?= $base_url; ?>pages/auth/usuarios-admin.php" class="link-nav-desktop <?= $activeUsuariosAdmin ? 'active-link-desktop' : ''; ?>">Usuários do sistema</a>
     <a href="<?= $base_url; ?>pages/backups/backups-sistema.php" class="link-nav-desktop <?= $activeBackups ? 'active-link-desktop' : ''; ?>">Backups do sistema</a>
     <a href="<?= $base_url; ?>pages/configuracoes/configuracoes.php" class="link-nav-desktop <?= $activeConfiguracoes ? 'active-link-desktop' : ''; ?>">Configurações</a>

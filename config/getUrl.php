@@ -10,6 +10,8 @@
         $pagAtual = $_ENV['NOME_SITE'] . ' | Login Sistema';
     }else if(strpos($urlAtual, 'treino-aluno.php') !== false){
         $pagAtual = $_ENV['NOME_SITE'] . ' | Treino do Aluno';
+    }else if(strpos($urlAtual, 'alunos.php') !== false){
+        $pagAtual = $_ENV['NOME_SITE'] . ' | Alunos';
     }else if(strpos($urlAtual, 'configuracoes.php') !== false){
         $pagAtual = $_ENV['NOME_SITE'] . ' | Configurações';
     }else{
