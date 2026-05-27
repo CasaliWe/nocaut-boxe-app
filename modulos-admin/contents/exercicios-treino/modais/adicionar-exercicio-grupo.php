@@ -31,30 +31,9 @@
                   <select id='carga' name='carga'  class='form-control' required>
                     <option value='Máx' selected>Máx</option>
                     <option value='Livre'>Livre</option>
-                    <option value='1kg'>1kg</option>
-                    <option value='2kg'>2kg</option>
-                    <option value='3kg'>3kg</option>
-                    <option value='4kg'>4kg</option>
-                    <option value='5kg'>5kg</option>
-                    <option value='6kg'>6kg</option>
-                    <option value='7kg'>7kg</option>
-                    <option value='8kg'>8kg</option>
-                    <option value='9kg'>9kg</option>
-                    <option value='10kg'>10kg</option>
-                    <option value='15kg'>15kg</option>
-                    <option value='20kg'>20kg</option>
-                    <option value='25kg'>25kg</option>
-                    <option value='30kg'>30kg</option>
-                    <option value='35kg'>35kg</option>
-                    <option value='40kg'>40kg</option>
-                    <option value='45kg'>45kg</option>
-                    <option value='50kg'>50kg</option>
-                    <option value='55kg'>55kg</option>
-                    <option value='60kg'>60kg</option>
-                    <option value='65kg'>65kg</option>
-                    <option value='70kg'>70kg</option>
-                    <option value='75kg'>75kg</option>
-                    <option value='80kg'>80kg</option>
+                    <?php for($peso = 1; $peso <= 100; $peso++){ ?>
+                      <option value='<?= $peso; ?>kg'><?= $peso; ?>kg</option>
+                    <?php } ?>
                   </select>
                 </div>
 

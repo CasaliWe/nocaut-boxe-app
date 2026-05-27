@@ -12,8 +12,10 @@
     $activeEditarTreinoMusculacao = false;
     $activeExerciciosTreinoMusculacao = false;
     $activeAlunos = false;
+    $activeEntradasSaidas = false;
     $activeBackups = false;
     $activeConfiguracoes = false;
+    $isAdministrador = ($_SESSION['tipo-user'] ?? '') === 'administrador';
 
     // Devolve o nome da página atual
     if(strpos($urlAtual, 'treinos-musculacao.php') !== false){
@@ -34,6 +36,9 @@
     }else if(strpos($urlAtual, 'alunos.php') !== false){
         $tituloContentPagina = "Alunos";
         $activeAlunos = true;
+    }else if(strpos($urlAtual, 'entradas-saidas.php') !== false){
+        $tituloContentPagina = "Entradas e Saídas";
+        $activeEntradasSaidas = true;
     }else if(strpos($urlAtual, 'backups-sistema.php') !== false){
         $tituloContentPagina = "Backups do sistema";
         $activeBackups = true;
@@ -52,6 +57,9 @@
 <nav class="d-flex flex-column w-100 mt-5 pt-5 mt-lg-0 pt-lg-0">
     <a href="<?= $base_url; ?>pages/treinos-musculacao/treinos-musculacao.php" class="link-nav-desktop <?= $activeTreinoMusculacao || $activeCadastroExerciciosMusculacao || $activeEditarTreinoMusculacao || $activeExerciciosTreinoMusculacao ? 'active-link-desktop' : ''; ?>">Treinos Musculação</a>
     <a href="<?= $base_url; ?>pages/alunos/alunos.php" class="link-nav-desktop <?= $activeAlunos ? 'active-link-desktop' : ''; ?>">Alunos</a>
+    <?php if($isAdministrador){ ?>
+        <a href="<?= $base_url; ?>pages/entradas-saidas/entradas-saidas.php" class="link-nav-desktop <?= $activeEntradasSaidas ? 'active-link-desktop' : ''; ?>">Entradas e Saídas</a>
+    <?php } ?>
     <a href="<?= $base_url; ?>pages/auth/usuarios-admin.php" class="link-nav-desktop <?= $activeUsuariosAdmin ? 'active-link-desktop' : ''; ?>">Usuários do sistema</a>
     <a href="<?= $base_url; ?>pages/backups/backups-sistema.php" class="link-nav-desktop <?= $activeBackups ? 'active-link-desktop' : ''; ?>">Backups do sistema</a>
     <a href="<?= $base_url; ?>pages/configuracoes/configuracoes.php" class="link-nav-desktop <?= $activeConfiguracoes ? 'active-link-desktop' : ''; ?>">Configurações</a>

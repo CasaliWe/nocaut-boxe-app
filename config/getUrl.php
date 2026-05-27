@@ -12,6 +12,8 @@
         $pagAtual = $_ENV['NOME_SITE'] . ' | Treino do Aluno';
     }else if(strpos($urlAtual, 'alunos.php') !== false){
         $pagAtual = $_ENV['NOME_SITE'] . ' | Alunos';
+    }else if(strpos($urlAtual, 'entradas-saidas.php') !== false){
+        $pagAtual = $_ENV['NOME_SITE'] . ' | Entradas e Saídas';
     }else if(strpos($urlAtual, 'configuracoes.php') !== false){
         $pagAtual = $_ENV['NOME_SITE'] . ' | Configurações';
     }else{
