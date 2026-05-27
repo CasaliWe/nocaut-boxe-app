@@ -1,6 +1,17 @@
 <?php
-    $sufixo = $contexto === 'editar' ? '-editar' : '';
-    $contextoJs = $contexto === 'editar' ? 'editar' : 'add';
+    $sufixo = $contexto === 'editar' ? '-editar' : ($contexto === 'aprovacao' ? '-aprovacao' : '');
+    $contextoJs = $contexto;
+    if(!isset($modalidades_aluno)){
+        $modalidades_aluno = [
+            'boxe' => 'Boxe',
+            'funcional' => 'Funcional',
+            'musculacao' => 'Musculação',
+            'boxe_funcional' => 'Boxe + Funcional',
+            'boxe_musculacao' => 'Boxe + Musculação',
+            'musculacao_funcional' => 'Musculação + Funcional',
+            'boxe_funcional_musculacao' => 'Boxe + Funcional + Musculação',
+        ];
+    }
 ?>
 
 <div class="modal-body">
@@ -35,9 +46,9 @@
             <label for="modalidade-aluno<?= $sufixo; ?>" class="small">Modalidade*</label>
             <select id="modalidade-aluno<?= $sufixo; ?>" name="modalidade-aluno" class="form-control" required>
                 <option value="">Selecione</option>
-                <option value="boxe">Boxe</option>
-                <option value="funcional">Funcional</option>
-                <option value="musculacao">Musculação</option>
+                <?php foreach($modalidades_aluno as $valorModalidade => $labelModalidade){ ?>
+                    <option value="<?= htmlspecialchars($valorModalidade, ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars($labelModalidade, ENT_QUOTES, 'UTF-8'); ?></option>
+                <?php } ?>
             </select>
         </div>
 
@@ -100,7 +111,7 @@
         </div>
     </div>
 
-    <div id="<?= $contexto === 'editar' ? 'campos-responsavel-editar' : 'campos-responsavel'; ?>" class="campo-responsavel d-none">
+    <div id="campos-responsavel<?= $sufixo; ?>" class="campo-responsavel d-none">
         <h6 class="fw-bold mb-3">Responsável</h6>
         <div class="row g-3 mb-4">
             <div class="col-12 col-lg-6">
@@ -125,7 +136,7 @@
             </select>
         </div>
 
-        <div id="<?= $contexto === 'editar' ? 'campo-descricao-problema-saude-editar' : 'campo-descricao-problema-saude'; ?>" class="campo-problema-saude d-none col-12 col-lg-8">
+        <div id="campo-descricao-problema-saude<?= $sufixo; ?>" class="campo-problema-saude d-none col-12 col-lg-8">
             <label for="descricao-problema-saude-aluno<?= $sufixo; ?>" class="small">Descreva o problema de saúde*</label>
             <input type="text" id="descricao-problema-saude-aluno<?= $sufixo; ?>" name="descricao-problema-saude-aluno" class="form-control">
         </div>

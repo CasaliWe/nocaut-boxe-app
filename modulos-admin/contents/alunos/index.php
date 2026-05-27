@@ -3,6 +3,24 @@
         return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
     }
 
+    function opcoesModalidadesAluno() {
+        return [
+            'boxe' => 'Boxe',
+            'funcional' => 'Funcional',
+            'musculacao' => 'Musculação',
+            'boxe_funcional' => 'Boxe + Funcional',
+            'boxe_musculacao' => 'Boxe + Musculação',
+            'musculacao_funcional' => 'Musculação + Funcional',
+            'boxe_funcional_musculacao' => 'Boxe + Funcional + Musculação',
+        ];
+    }
+
+    function labelModalidadeAluno($modalidade) {
+        $opcoes = opcoesModalidadesAluno();
+
+        return $opcoes[$modalidade] ?? $modalidade;
+    }
+
     function formatarRealAluno($valor) {
         return 'R$ ' . number_format((float) $valor, 2, ',', '.');
     }
@@ -116,7 +134,35 @@
         ];
     }
 
+    function payloadSolicitacaoAluno($solicitacao) {
+        return [
+            'id' => $solicitacao['id'],
+            'nome' => $solicitacao['nome'],
+            'rua' => $solicitacao['rua'],
+            'numero' => $solicitacao['numero'],
+            'bairro' => $solicitacao['bairro'],
+            'cep' => $solicitacao['cep'],
+            'tipo_documento' => $solicitacao['tipo_documento'],
+            'documento' => $solicitacao['documento'],
+            'telefone_contato' => $solicitacao['telefone_contato'],
+            'telefone_emergencia' => $solicitacao['telefone_emergencia'],
+            'responsavel_nome' => $solicitacao['responsavel_nome'],
+            'responsavel_telefone' => $solicitacao['responsavel_telefone'],
+            'data_nascimento' => $solicitacao['data_nascimento'],
+            'sexo' => $solicitacao['sexo'],
+            'modalidade' => $solicitacao['modalidade'],
+            'autoriza_imagem' => (int) $solicitacao['autoriza_imagem'],
+            'tem_problema_saude' => (int) $solicitacao['tem_problema_saude'],
+            'descricao_problema_saude' => $solicitacao['descricao_problema_saude'],
+            'facebook' => $solicitacao['facebook'],
+            'instagram' => $solicitacao['instagram'],
+            'observacoes' => $solicitacao['observacoes'],
+        ];
+    }
+
     $pacotes_js = [];
+    $modalidades_aluno = opcoesModalidadesAluno();
+
     foreach($pacotes_valores as $pacote){
         $pacotes_js[] = [
             'id' => (int) $pacote['id'],
@@ -187,11 +233,19 @@
     <div class="alert alert-secondary d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center mb-4" role="alert">
         <div>
             <h6 class="fw-bold mb-1">Aprovações de cadastro</h6>
-            <p class="small mb-0">Espaço reservado para os cadastros enviados pelos alunos pelo link externo.</p>
+            <p class="small mb-0">
+                Solicitações pendentes: <span class="fw-bold"><?= count($solicitacoes_alunos); ?></span>
+                <span id="aviso-link-cadastro" class="text-success fw-semibold d-none ms-lg-2">Link copiado!</span>
+            </p>
         </div>
-        <button type="button" class="mt-3 mt-lg-0 btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#aprovacoes-em-breve">
-            Ver aprovações
-        </button>
+        <div class="d-flex flex-column flex-sm-row gap-2 mt-3 mt-lg-0">
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="copiarLinkCadastroAluno('<?= $base_url; ?>cadastro-aluno.php')">
+                Copiar link do aluno
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#aprovacoes-alunos">
+                Ver aprovações
+            </button>
+        </div>
     </div>
 
     <div class="card mb-4">
@@ -219,9 +273,11 @@
                     <label for="modalidade-filtro" class="small">Modalidade</label>
                     <select id="modalidade-filtro" name="modalidade" class="form-control">
                         <option value="">Todas</option>
-                        <option value="boxe" <?= $filtros['modalidade'] === 'boxe' ? 'selected' : ''; ?>>Boxe</option>
-                        <option value="funcional" <?= $filtros['modalidade'] === 'funcional' ? 'selected' : ''; ?>>Funcional</option>
-                        <option value="musculacao" <?= $filtros['modalidade'] === 'musculacao' ? 'selected' : ''; ?>>Musculação</option>
+                        <?php foreach($modalidades_aluno as $valorModalidade => $labelModalidade){ ?>
+                            <option value="<?= hAluno($valorModalidade); ?>" <?= $filtros['modalidade'] === $valorModalidade ? 'selected' : ''; ?>>
+                                <?= hAluno($labelModalidade); ?>
+                            </option>
+                        <?php } ?>
                     </select>
                 </div>
 
@@ -270,7 +326,7 @@
                         <div class="card-header d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
                             <div>
                                 <h5 class="my-1 card-title"><?= hAluno($aluno['nome']); ?></h5>
-                                <small class="text-muted"><?= hAluno($aluno['modalidade']); ?> - <?= hAluno($aluno['pacote_descricao']); ?></small>
+                                <small class="text-muted"><?= hAluno(labelModalidadeAluno($aluno['modalidade'])); ?> - <?= hAluno($aluno['pacote_descricao']); ?></small>
                             </div>
                             <div class="mt-2 mt-md-0 d-flex flex-wrap gap-2">
                                 <span class="badge <?= badgeStatusAluno($statusAluno); ?>"><?= hAluno(ucfirst($statusAluno)); ?></span>
@@ -326,7 +382,7 @@
     const timersBuscaPacotesAluno = {};
 
     function campoAluno(nome, contexto){
-        const sufixo = contexto === 'editar' ? '-editar' : '';
+        const sufixo = contexto === 'editar' ? '-editar' : (contexto === 'aprovacao' ? '-aprovacao' : '');
         return document.getElementById(nome + sufixo);
     }
 
@@ -547,7 +603,7 @@
 
     function verificarMenorIdadeAluno(contexto){
         const dataNascimento = campoAluno('data-nascimento-aluno', contexto);
-        const bloco = document.getElementById(contexto === 'editar' ? 'campos-responsavel-editar' : 'campos-responsavel');
+        const bloco = document.getElementById('campos-responsavel' + (contexto === 'editar' ? '-editar' : (contexto === 'aprovacao' ? '-aprovacao' : '')));
         const nomeResponsavel = campoAluno('responsavel-nome-aluno', contexto);
         const telefoneResponsavel = campoAluno('responsavel-telefone-aluno', contexto);
 
@@ -580,7 +636,7 @@
 
     function verificarProblemaSaudeAluno(contexto){
         const select = campoAluno('problema-saude-aluno', contexto);
-        const bloco = document.getElementById(contexto === 'editar' ? 'campo-descricao-problema-saude-editar' : 'campo-descricao-problema-saude');
+        const bloco = document.getElementById('campo-descricao-problema-saude' + (contexto === 'editar' ? '-editar' : (contexto === 'aprovacao' ? '-aprovacao' : '')));
         const descricao = campoAluno('descricao-problema-saude-aluno', contexto);
 
         if(select.value === '1'){
@@ -642,6 +698,87 @@
         meuModal.show();
     }
 
+    function preencherFormularioAluno(contexto, aluno){
+        campoAluno('nome-aluno', contexto).value = aluno.nome || '';
+        campoAluno('rua-aluno', contexto).value = aluno.rua || '';
+        campoAluno('numero-aluno', contexto).value = aluno.numero || '';
+        campoAluno('bairro-aluno', contexto).value = aluno.bairro || '';
+        campoAluno('cep-aluno', contexto).value = aluno.cep || '';
+        campoAluno('tipo-documento-aluno', contexto).value = aluno.tipo_documento || 'cpf';
+        campoAluno('documento-aluno', contexto).value = aluno.documento || '';
+        campoAluno('telefone-contato-aluno', contexto).value = aluno.telefone_contato || '';
+        campoAluno('telefone-emergencia-aluno', contexto).value = aluno.telefone_emergencia || '';
+        campoAluno('responsavel-nome-aluno', contexto).value = aluno.responsavel_nome || '';
+        campoAluno('responsavel-telefone-aluno', contexto).value = aluno.responsavel_telefone || '';
+        campoAluno('data-nascimento-aluno', contexto).value = aluno.data_nascimento || '';
+        campoAluno('sexo-aluno', contexto).value = aluno.sexo || '';
+        campoAluno('modalidade-aluno', contexto).value = aluno.modalidade || '';
+        campoAluno('autoriza-imagem-aluno', contexto).checked = Number(aluno.autoriza_imagem) === 1;
+        campoAluno('problema-saude-aluno', contexto).value = Number(aluno.tem_problema_saude) === 1 ? '1' : '0';
+        campoAluno('descricao-problema-saude-aluno', contexto).value = aluno.descricao_problema_saude || '';
+        campoAluno('facebook-aluno', contexto).value = aluno.facebook || '';
+        campoAluno('instagram-aluno', contexto).value = aluno.instagram || '';
+        campoAluno('observacoes-aluno', contexto).value = aluno.observacoes || '';
+
+        ajustarDocumentoAluno(contexto);
+        verificarMenorIdadeAluno(contexto);
+        verificarProblemaSaudeAluno(contexto);
+    }
+
+    function aprovarSolicitacaoAluno(botao){
+        const solicitacao = JSON.parse(botao.dataset.solicitacao);
+
+        document.getElementById('id-solicitacao-aluno-aprovacao').value = solicitacao.id || '';
+        preencherFormularioAluno('aprovacao', solicitacao);
+
+        campoAluno('data-inicio-aluno', 'aprovacao').value = dataHojeAluno();
+        campoAluno('pacote-aluno', 'aprovacao').value = '';
+        campoAluno('servico-valor-id-aluno', 'aprovacao').value = '';
+        campoAluno('servico-valor-id-aluno', 'aprovacao').dataset.valor = '0';
+        campoAluno('valor-pacote-preview-aluno', 'aprovacao').textContent = 'Selecione um pacote cadastrado.';
+        campoAluno('juros-percentual-aluno', 'aprovacao').value = '';
+        campoAluno('desconto-percentual-aluno', 'aprovacao').value = '';
+        campoAluno('status-aluno', 'aprovacao').value = 'em aberto';
+        campoAluno('data-pagamento-aluno', 'aprovacao').value = '';
+        campoAluno('data-vencimento-aluno', 'aprovacao').value = '';
+        calcularValorFinalAluno('aprovacao');
+        esconderOpcoesPacotesAluno('aprovacao');
+
+        var listaModal = bootstrap.Modal.getInstance(document.getElementById('aprovacoes-alunos'));
+        if(listaModal){
+            listaModal.hide();
+        }
+
+        var meuModal = new bootstrap.Modal(document.getElementById('aprovar-aluno-solicitacao'));
+        meuModal.show();
+    }
+
+    function copiarLinkCadastroAluno(url){
+        if(!navigator.clipboard){
+            const inputTemp = document.createElement('input');
+            inputTemp.value = url;
+            document.body.appendChild(inputTemp);
+            inputTemp.select();
+            document.execCommand('copy');
+            document.body.removeChild(inputTemp);
+
+            const aviso = document.getElementById('aviso-link-cadastro');
+            aviso.classList.remove('d-none');
+            setTimeout(function(){
+                aviso.classList.add('d-none');
+            }, 2500);
+            return;
+        }
+
+        navigator.clipboard.writeText(url).then(function(){
+            const aviso = document.getElementById('aviso-link-cadastro');
+            aviso.classList.remove('d-none');
+            setTimeout(function(){
+                aviso.classList.add('d-none');
+            }, 2500);
+        });
+    }
+
     function deletarAluno(id){
         document.getElementById('id-aluno-deletar').value = id;
 
@@ -653,6 +790,7 @@
         if(!event.target.closest('.pacotes-alunos-opcoes') && !event.target.closest('[id^="pacote-aluno"]')){
             esconderOpcoesPacotesAluno('add');
             esconderOpcoesPacotesAluno('editar');
+            esconderOpcoesPacotesAluno('aprovacao');
         }
     });
 </script>

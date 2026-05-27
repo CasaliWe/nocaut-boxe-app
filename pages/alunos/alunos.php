@@ -6,6 +6,7 @@
    require __DIR__ . '/../../config/config.php';
 
    use Repositories\AlunoRepository;
+   use Repositories\AlunoSolicitacaoRepository;
    use Repositories\ServicoValorRepository;
 
    $filtros = [
@@ -17,6 +18,7 @@
 
    $pacotes_valores = ServicoValorRepository::getAll();
    $alunos = AlunoRepository::getAll($filtros);
+   $solicitacoes_alunos = AlunoSolicitacaoRepository::getPendentes();
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +68,7 @@
     <!-- MODAL DELETAR ALUNO -->
 
     <!-- MODAL APROVACOES -->
-    <?php include_once  __DIR__ . "/../../modulos-admin/contents/alunos/modais/aprovacoes-em-breve.php"; ?>
+    <?php include_once  __DIR__ . "/../../modulos-admin/contents/alunos/modais/aprovacoes-alunos.php"; ?>
     <!-- MODAL APROVACOES -->
 
 

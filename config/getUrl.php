@@ -1,7 +1,7 @@
 <?php
 
     // Obtém a URL atual
-    $urlAtual = $_SERVER['REQUEST_URI'];
+    $urlAtual = $_SERVER['REQUEST_URI'] ?? '';
 
     // Devolve o nome da página atual para colocar no título
     if(strpos($urlAtual, 'index.php') !== false){

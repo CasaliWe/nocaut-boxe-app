@@ -43,7 +43,7 @@ function dadosAlunoPost() {
     $idade = idadeAlunoCadastro($dataNascimento);
     $pacote = ServicoValorRepository::getById($_POST['servico-valor-id-aluno'] ?? null);
 
-    if(!$pacote || $nome === '' || !$dataNascimento || !dataAlunoPost('data-vencimento-aluno')){
+    if(!$pacote || $nome === '' || !$dataNascimento || !dataAlunoPost('data-inicio-aluno') || !dataAlunoPost('data-vencimento-aluno')){
         return null;
     }
 
@@ -79,7 +79,17 @@ function dadosAlunoPost() {
     }
 
     $modalidade = textoAlunoPost('modalidade-aluno');
-    if(!in_array($modalidade, ['boxe', 'funcional', 'musculacao'], true)){
+    $modalidadesPermitidas = [
+        'boxe',
+        'funcional',
+        'musculacao',
+        'boxe_funcional',
+        'boxe_musculacao',
+        'musculacao_funcional',
+        'boxe_funcional_musculacao',
+    ];
+
+    if(!in_array($modalidade, $modalidadesPermitidas, true)){
         return null;
     }
 
